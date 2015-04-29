@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room: MyString
+  max_players: 1
+  kind: 1
+  instance: MyString
+
+two:
+  room: MyString
+  max_players: 1
+  kind: 1
+  instance: MyString

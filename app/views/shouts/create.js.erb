@@ -1,0 +1,4 @@
+<% broadcast "/shouts/new" do %>
+$("#shout").append("<%= escape_javascript render(@shout) %>");
+<% end %>
+$("#new_shout")[0].reset();

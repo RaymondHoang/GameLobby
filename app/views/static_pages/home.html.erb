@@ -1,0 +1,28 @@
+<% provide(:title, 'Home') %>
+<h1>Welcome to GameLobby</h1>
+  <%if session[:userid].nil?%>
+  <%= link_to "Sign up now!", "users/new", class: "btn btn-large btn-primary" %>
+  <%else%>
+  <h2>You are logged in as <b><%=User.find_by(id: session[:userid]).nickname%></b></h2>
+  <div>
+<div>
+  <h2>Shouts</h2>
+
+<ul id="shout">
+  <%unless @shouts.nil?%>
+  <%= render partial: @shouts %>
+  <%end%>
+</ul>
+
+<div><%= form_for Shout.create, :remote => true do |f| %>
+  <%= f.text_field :content %>
+  <%= f.submit "Send" %>
+<% end %>
+</div>
+  <%= link_to "Show All Users", users_path, class: "btn btn-large btn-primary" %>
+  <%= link_to "Create your game", "games/choose", class: "btn btn-large btn-primary" %>
+    <%= link_to "Your Profile", user_path(session[:userid]), class: "btn btn-large btn-primary"%>
+  </div>
+  <%end%>
+  </div>
+</div>

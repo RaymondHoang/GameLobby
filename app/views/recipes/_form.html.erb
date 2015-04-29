@@ -1,0 +1,43 @@
+<%= form_for(@recipe) do |f| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%=f.hidden_field :user_id, value: session[:userid]%>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :mealtime %><br>
+    <%= f.select :mealtime, [['Breakfast', 'Breakfast'], ['Lunch', 'Lunch'], ['Dinner', 'Dinner'], ['Brunch','Brunch'], ['Supper','Supper'], ['Snacks', 'Snacks'], ['Other','Other']], :include_blank => true %>
+  </div>
+  <div class="field">
+    <%= f.label :style %><br>
+    <%= f.select :style, [['American','American'],['Oriental','Oriental'],['Mediterranean','Mediterranean'],['European','European'],['Other', 'Other']], :include_blank => true %>
+  </div>
+  <div class="text">
+    <%= f.label :ingredient %><br>
+    <%= f.text_area :ingredient, size: "75x10" %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br>
+    <%= f.text_area :desc, size: "75x10" %>
+  </div>
+  <div class="field">
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: "btn btn-large btn-primary"%>
+  </div>
+<% end %>

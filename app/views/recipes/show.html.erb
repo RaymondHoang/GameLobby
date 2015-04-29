@@ -1,0 +1,63 @@
+<%provide(:title, @recipe.name)%>
+<p id="notice"><%= notice %></p>
+<h3><%=@recipe.name %></h3>
+<p>
+  <strong>User:</strong>
+  <%= User.find_by(id: @recipe.user_id).nickname %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @recipe.name %>
+</p>
+
+<p>
+  <strong>Mealtime:</strong>
+  <%= @recipe.mealtime %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @recipe.style %>
+</p>
+
+<p>
+  <strong>Ingredient:</strong>
+  <%= @recipe.ingredient %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @recipe.desc %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%=link_to image_tag(@recipe.picture.url(:medium)), @recipe.picture.url(:original), :popup =>['original_image', 'height=700,width=900'] %>
+</p>
+
+<% if @recipe.user_id == session[:userid] or session[:userid] == 1%>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%end%>
+<%= link_to 'Back', recipes_path %>
+<h2>Comments</h2>
+ <div id="comments">
+   <%= render :partial => @recipe.comments %>
+ </div>
+<br>
+<% if !session[:userid].nil? %>
+<%= form_for ([@recipe, @recipe.comments.build]) do |f| %>
+<div class="field">
+    <%=f.hidden_field :user_id, value: session[:userid]%>
+  </div>
+<div class="field">
+  <%=f.hidden_field :recipe_id, value: @recipe.id%>
+  </div>
+<div class="field">
+  <%= f.label :body, "New comment" %><br>
+  <%= f.text_area :body, size: "50x10" %>
+</div>
+<div class="actions">
+<%= f.submit "Comment" %>
+</div>
+<% end %>
+<%end%>

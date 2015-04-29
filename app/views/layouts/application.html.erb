@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GameLobby | <%=yield(:title)%></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'http://localhost:9292/faye.js' %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+<div class="center hero-unit">
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=937111076301212";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+<div><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="GLTwitter" data-via="RayH_Web">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
+<body>
+<header class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar-inner">
+<div class="container">
+  <%= link_to "GameLobby", '/', id: "logo" %>
+<nav>
+<ul class="nav navbar-nav pull-right">
+<li><%= link_to "Home", '/' %></li>
+  <li><%= link_to "Help", '/help' %></li>
+  <li><%= link_to "Games", '/games'%></li>
+  <%if session[:userid].nil?%>
+    <li><%= link_to "Sign in", '/signin' %></li>
+  <%else%>
+  <li><%= link_to User.find_by(id: session[:userid]).nickname, user_path(session[:userid])%></li>
+    <li><%= link_to "Sign out", '/signout', method: :delete %></li>
+  <%end%>
+  
+</ul>
+</nav>
+</div>
+</div>
+</header>
+<div class="container">
+<%= yield %>
+<footer class="footer">
+<nav>
+<ul>
+<li><%= link_to "About", 'about' %></li>
+<li><%= link_to "Contact", 'contact' %></li>
+</ul>
+</nav>
+</footer>
+</div>
+</body>
+
+</body>
+</html>

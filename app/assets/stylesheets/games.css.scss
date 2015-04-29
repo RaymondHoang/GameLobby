@@ -1,0 +1,14 @@
+// Place all the styles related to the Games controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+table { 
+  border-spacing: 10px;
+  border-collapse: separate;
+}
+ 
+td {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+}

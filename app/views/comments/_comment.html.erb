@@ -1,0 +1,19 @@
+<%= div_for comment do %>
+<p>
+  <strong>
+    <%=User.find_by(id: comment.user_id).nickname%>
+  </strong>
+  commented <%= time_ago_in_words(comment.created_at) %> ago: 
+  <span>
+    <%= comment.body %>
+  </span>
+</p>
+
+<% end %>
+<% if @recipe.user_id == session[:userid] or session[:userid] == 1%>
+<p>
+  <%= link_to 'Delete this comment', [comment.recipe, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
+<%end%>

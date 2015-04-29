@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Room:</strong>
+  <%= @game.room %> <span style="color:grey;">(<%= @ftm_game::__id__ %>)</span>
+</p>
+<p>
+  <strong>Max players:</strong>
+  <%= @game.max_players %>
+</p>
+<p>
+  <strong>Kind:</strong>
+  <%= @game.kind %>
+</p>
+
+<%= link_to 'Join Table', games_path%> |
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
